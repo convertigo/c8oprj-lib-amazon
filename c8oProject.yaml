@@ -1,0 +1,17 @@
+↑convertigo: 8.0.0.m006
+↓lib_Amazon [core.Project]: 
+  comment: |
+    'Amazon AWS Connector
+    ## Symbols
+    
+    | Symbol                     | Usaqe                                           |
+    |----------------------------|-------------------------------------------------|lib_amazon.AWS_ACCESS_KEY	       | Your AWS Acess  KEY   |
+    |lib_amazon.AWS_ACCESS_KEY.secret  | Your AWS Acess Seceret KEY   |
+    |lib_amazon.AWS_REGION			   | The Region  |
+    
+    '
+  contextTimeout: 59
+  corsOrigin: =Origin
+  httpSessionTimeout: 60
+  ↓void [connectors.SqlConnector]: 🗏 connectors/void.yaml
+  ↓EcsListServices [sequences.GenericSequence]: 🗏 sequences/EcsListServices.yaml

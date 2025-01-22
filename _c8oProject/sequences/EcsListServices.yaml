@@ -1,0 +1,81 @@
+↓Execute [steps.SimpleStep-1737491377288]: 
+  expression: |
+    '// Import AWS SDK classes using JavaImporter
+    var AWS = new JavaImporter(
+        com.amazonaws.auth.AWSStaticCredentialsProvider,
+        com.amazonaws.auth.BasicAWSCredentials,
+        com.amazonaws.regions.Regions,
+        com.amazonaws.services.ecs.AmazonECS,
+        com.amazonaws.services.ecs.AmazonECSClientBuilder,
+        com.amazonaws.services.ecs.model.ListServicesRequest,
+        com.amazonaws.services.ecs.model.ListServicesResult
+    );
+    
+    function listServices() {
+    	with (AWS) {
+    	    // Replace these with your actual AWS credentials
+    	    var AWS_ACCESS_KEY = "${lib_amazon.AWS_ACCESS_KEY=mykey}";
+    	    var AWS_SECRET_KEY = "${lib_amazon.AWS_ACCESS_KEY.secret=mysecretkey}";
+    	
+    	    // Configure AWS region
+    	    var region = Regions["${lib_amazon.AWS_REGION=EU_WEST_1}"];
+    	
+    	    // Create AWS credentials
+    		  var awsCreds = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
+      
+    	    // Create ECS client with explicit credentials
+            var ecsClient = AmazonECSClientBuilder.standard()
+                .withRegion(region)
+                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                .build();
+    	
+    	    try {
+    	        // Create ListServices request
+                var request = new ListServicesRequest()
+                    .withCluster(cluster) // Replace with your cluster name if needed
+                    .withMaxResults(100);    // Number of services to retrieve
+    	
+    	        // Call ECS ListServices API
+    	        jResponse = ecsClient.listServices(request);
+    	    } catch (e) {
+    			// Handle exceptions
+    			log.error("Error listing services: " + e);
+    			jError = e;
+    	    } finally {
+    	        // Close ECS client
+    	    }
+    	}
+    }
+    
+    // Call the function
+    var jResponse = null
+    var jError = null
+    listServices();
+    '
+↓jIf [steps.IfStep-1737496359730]: 
+  condition: jError != null
+  ↓Error_structure [steps.XMLErrorStep-1737496387187]: 
+    details: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
+        - SmartType: 
+          - ↑mode: JS
+          - →→: jError
+  ↓Return [steps.ReturnStep-1737496425399]: 
+↓object [steps.JsonToXmlStep-1737492107741]: 
+  jsonObject: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
+      - SmartType: 
+        - ↑mode: JS
+        - →→: response
+  key: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
+      - SmartType: 
+        - ↑mode: PLAIN
+        - →→: Response
+↓cluster [variables.RequestableVariable-1737492007718]: 
+↓TestOK [core.TestCase]: 
+  ↓cluster [variables.TestCaseVariable-1737492143739]: 
+    value: CloudDEV
