@@ -33,7 +33,7 @@ does nothing
 
 ## ![](https://github.com/convertigo/convertigo/blob/develop/engine/src/com/twinsoft/convertigo/beans/sequences/images/genericsequence_color_16x16.png?raw=true "GenericSequence") EcsListServices
 
-
+List services from a Cluster
 
 <span style="color:DarkGoldenRod">Variables</span>
 
@@ -51,7 +51,7 @@ comment
 <img src="https://github.com/convertigo/convertigo/blob/develop/engine/src/com/twinsoft/convertigo/beans/variables/images/variable_color_16x16.png?raw=true "  alt="RequestableVariable" >&nbsp;cluster
 </td>
 <td>
-
+Cluster  Name
 </td>
 </tr>
 </table>

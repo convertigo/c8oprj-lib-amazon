@@ -1,3 +1,4 @@
+comment: List services from a Cluster
 ↓Execute [steps.SimpleStep-1737491377288]: 
   expression: |
     '// Import AWS SDK classes using JavaImporter
@@ -76,6 +77,7 @@
         - ↑mode: PLAIN
         - →→: Response
 ↓cluster [variables.RequestableVariable-1737492007718]: 
+  comment: Cluster  Name
 ↓TestOK [core.TestCase]: 
   ↓cluster [variables.TestCaseVariable-1737492143739]: 
     value: CloudDEV

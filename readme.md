@@ -52,6 +52,8 @@ For more technical informations : [documentation](./project.md)
 
 ### EcsListServices
 
+List services from a Cluster
+
 **variables**
 
 <table>
@@ -59,7 +61,7 @@ For more technical informations : [documentation](./project.md)
 <th>name</th><th>comment</th>
 </tr>
 <tr>
-<td>cluster</td><td></td>
+<td>cluster</td><td>Cluster  Name</td>
 </tr>
 </table>
 
