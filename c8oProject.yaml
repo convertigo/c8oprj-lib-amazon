@@ -4,10 +4,11 @@
     'Amazon AWS Connector
     ## Symbols
     
-    | Symbol                     | Usaqe                                           |
-    |----------------------------|-------------------------------------------------|lib_amazon.AWS_ACCESS_KEY	       | Your AWS Acess  KEY   |
-    |lib_amazon.AWS_ACCESS_KEY.secret  | Your AWS Acess Seceret KEY   |
-    |lib_amazon.AWS_REGION			   | The Region  |
+    | Symbol                          | Usage                      |
+    |---------------------------------|----------------------------|
+    | `lib_amazon.AWS_ACCESS_KEY`     | Your AWS Access Key        |
+    | `lib_amazon.AWS_ACCESS_KEY.secret` | Your AWS Access Secret Key |
+    | `lib_amazon.AWS_REGION`         | The AWS Region             |
     
     '
   contextTimeout: 59
