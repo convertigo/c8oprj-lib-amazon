@@ -37,7 +37,12 @@ comment: List services from a Cluster
                     .withMaxResults(100);    // Number of services to retrieve
     	
     	        // Call ECS ListServices API
-    	        jResponse = ecsClient.listServices(request);
+    	        reponse = ecsClient.listServices(request);
+    	        jResponse = [];
+    			serviceArns = reponse.getServiceArns()
+    			for (var i = 0; i < serviceArns.size(); i++) {
+    				jResponse.push(serviceArn.get(i));
+    			};
     	    } catch (e) {
     			// Handle exceptions
     			log.error("Error listing services: " + e);
@@ -52,6 +57,7 @@ comment: List services from a Cluster
     var jResponse = null
     var jError = null
     listServices();
+    
     '
 ↓jIf [steps.IfStep-1737496359730]: 
   condition: jError != null
@@ -69,13 +75,83 @@ comment: List services from a Cluster
       - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
       - SmartType: 
         - ↑mode: JS
-        - →→: response
+        - →→: jResponse
+  jsonSample: |
+    '{
+      "response": {
+        "services": [
+          {
+            "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/cluster-prod/service-orders",
+            "serviceName": "service-orders",
+            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/cluster-prod",
+            "status": "ACTIVE",
+            "desiredCount": 4,
+            "runningCount": 4,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "createdAt": "2023-11-15T08:00:00Z",
+            "tags": [
+              {
+                "key": "Environment",
+                "value": "Production"
+              },
+              {
+                "key": "Team",
+                "value": "E-Commerce"
+              }
+            ]
+          },
+          {
+            "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/cluster-staging/service-payments",
+            "serviceName": "service-payments",
+            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/cluster-staging",
+            "status": "ACTIVE",
+            "desiredCount": 2,
+            "runningCount": 2,
+            "pendingCount": 0,
+            "launchType": "EC2",
+            "createdAt": "2024-01-10T10:45:00Z",
+            "tags": [
+              {
+                "key": "Environment",
+                "value": "Staging"
+              },
+              {
+                "key": "Application",
+                "value": "PaymentsService"
+              }
+            ]
+          },
+          {
+            "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/cluster-dev/service-auth",
+            "serviceName": "service-auth",
+            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/cluster-dev",
+            "status": "ACTIVE",
+            "desiredCount": 3,
+            "runningCount": 3,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "createdAt": "2024-02-01T14:20:00Z",
+            "tags": [
+              {
+                "key": "Environment",
+                "value": "Development"
+              },
+              {
+                "key": "Team",
+                "value": "Authentication"
+              }
+            ]
+          }
+        ]
+      }
+    }'
   key: 
     - xmlizable: 
       - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
       - SmartType: 
         - ↑mode: PLAIN
-        - →→: Response
+        - →→: Data
 ↓cluster [variables.RequestableVariable-1737492007718]: 
   comment: Cluster  Name
 ↓TestOK [core.TestCase]: 

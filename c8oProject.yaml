@@ -14,5 +14,6 @@
   contextTimeout: 59
   corsOrigin: =Origin
   httpSessionTimeout: 60
+  version: 1.0
   ↓void [connectors.SqlConnector]: 🗏 connectors/void.yaml
   ↓EcsListServices [sequences.GenericSequence]: 🗏 sequences/EcsListServices.yaml
